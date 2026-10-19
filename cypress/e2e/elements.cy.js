@@ -25,9 +25,11 @@ describe("File upload", () => {
 });
 
 describe("Sortable data table", () => {
-  const lastNames = () =>
-    cy.get("#table1 tbody tr td:nth-child(1)").then(($cells) => {
-      return [...$cells].map((cell) => cell.innerText.trim());
+  // Reads the Last Name column inside .should(), so Cypress retries until the table has sorted.
+  const lastNamesShould = (check) =>
+    cy.get("#table1 tbody tr td:nth-child(1)").should(($cells) => {
+      const names = Cypress._.map($cells, (cell) => cell.innerText.trim());
+      check(names);
     });
 
   beforeEach(() => {
@@ -37,7 +39,7 @@ describe("Sortable data table", () => {
   it("sorts by last name ascending on the first click", () => {
     cy.contains("#table1 th", "Last Name").click();
 
-    lastNames().then((names) => {
+    lastNamesShould((names) => {
       expect(names).to.deep.equal([...names].sort());
     });
   });
@@ -45,7 +47,7 @@ describe("Sortable data table", () => {
   it("sorts by last name descending on the second click", () => {
     cy.contains("#table1 th", "Last Name").click().click();
 
-    lastNames().then((names) => {
+    lastNamesShould((names) => {
       expect(names).to.deep.equal([...names].sort().reverse());
     });
   });

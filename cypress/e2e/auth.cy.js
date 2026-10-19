@@ -12,14 +12,14 @@ describe("Form authentication", () => {
   });
 
   it("shows an error for an invalid username", () => {
-    cy.login("not_a_user", Cypress.env("password"));
+    cy.login("not_a_user", Cypress.expose("password"));
 
     cy.url().should("include", "/login");
     cy.get("#flash").should("contain", "Your username is invalid!");
   });
 
   it("shows an error for an invalid password", () => {
-    cy.login(Cypress.env("username"), "wrong_password");
+    cy.login(Cypress.expose("username"), "wrong_password");
 
     cy.url().should("include", "/login");
     cy.get("#flash").should("contain", "Your password is invalid!");

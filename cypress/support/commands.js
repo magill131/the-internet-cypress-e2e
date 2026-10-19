@@ -1,5 +1,5 @@
 // Fill in and submit the login form on /login.
-Cypress.Commands.add("login", (username = Cypress.env("username"), password = Cypress.env("password")) => {
+Cypress.Commands.add("login", (username = Cypress.expose("username"), password = Cypress.expose("password")) => {
   cy.visit("/login");
   if (username) {
     cy.get("#username").type(username);

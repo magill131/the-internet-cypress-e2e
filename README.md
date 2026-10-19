@@ -56,4 +56,4 @@ npx cypress run --spec "cypress/e2e/auth.cy.js"   # one spec
 
 ## Results
 
-![CI run passing] (docs/results.png)
+![CI run passing](docs/results.png)

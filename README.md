@@ -56,4 +56,4 @@ npx cypress run --spec "cypress/e2e/auth.cy.js"   # one spec
 
 ## Results
 
-_Add a screenshot of the passing CI run here after the first run._
+![CI run passing] (docs/results.png)
